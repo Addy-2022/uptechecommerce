@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+<!-- title -->
+{% block title %}
+  my-cart page
+{% endblock title %}
+
+<!-- body -->
+{% block content %}
+  <!-- category -->
+    <section id="category my-3 py-3">
+        <div class="intro text-center">
+            <h6 class="display-6">our categories</h6>
+            <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+        </div>
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-8 mx-auto">
+                    <div class="table-responsive">
+                        {% if cart %}
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>s/n</th>
+                                    <th>#</th>
+                                    <th>image</th>
+                                    <th>product</th>
+                                    <th>price</th>
+                                    <th>qty</th>
+                                    <th>subtotal</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <tbody>
+                        {% for item in cart.cartproduct_set.all %}
+                            <td>{{forloop.counter}}</td>
+                            <td><a href="{% url 'managecart' item.id %}?action=rmv" class="text-decoration-none"><i class="bi bi-trash"></i></a></td>
+                            <td><img src="{{item.product.image.url}}" width="100" alt="{{item.product.title}}" class="img-thumbnail img-fluid"></td>
+                            <td>{{item.product.title}}</td>
+                            <td> &#8358; {{item.product.price |intcomma}}</td>
+                            <td>
+                                <a href="{% url 'managecart' item.id %}?action=inc" class="text-decoration-none text-success"><i class="bi bi-plus-circle-fill"></i></a>
+                                + {{item.quantity}}-
+                                <a href="{% url 'managecart' item.id %}?action=dcr" class="text-decoration-none text-success"><i class="bi bi-circle-fill"></i></a>
+                            </td>
+                            <td><h4>&#8358; {{item.subtotal |intcomma}} </h4></td>
+                            {% endfor %}
+
+                            <tr>
+                                <td><h3>Total:</h3></td>
+                                <td colspan="5" class="text-end"><h3>= &#8358; {{cart.total |intcomma}} </h3></td>
+                            </tr>
+
+                            <tr>
+                                {% if cart.cartproduct_set.all %}
+                                <td><a href="{% url 'stores' %}" class="btn btn-primary">continue shopping</a></td>
+                                <td><a href="{% url 'checkout' %}" class="btn btn-success">proceed to checkout</a></td> 
+                                {% else %}
+                                <td><a href="{% url 'stores' %}" class="btn btn-primary">continue shopping</a></td>
+                                <td><button type="button" class="btn btn-success disabled">proceed to checkout</button></td> 
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                        {% else %}
+                        <p class="lead bg-danger">no items in cart yet</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

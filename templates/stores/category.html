@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+<!-- title -->
+{% block title %}
+  category page
+{% endblock title %}
+
+<!-- body -->
+{% block content %}
+  <!-- category -->
+  <section id="category my-3 py-3">
+    <div class="intro text-center">
+      <h6 class="display-6">our categories</h6>
+      <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+    </div>
+    <div class="container">
+      <div class="row g-3">
+        {% if products %}
+          {% for product in category %}
+           <div class="col-md-3 text center">
+                <a href="{% url 'category' category.id %}" class="text-decoration-none">
+                    <div class="card">
+                        <img src="{{product.image.url}}" alt="" style="height:25vh;" class="img-fluid">
+                        <div class="card-body">
+                         <span class="badge bg-primary"><strong>In stock: {{product.stock}}</strong></span>
+                         <h3> &#8358; {{product.price}} </h3>
+                         <p class="lead">{{product.description |truncatewords:8}}</p>
+                        </div>
+                        <div class="card-footer">
+                          <button class="btn btn-success">add to cart</button>
+                          <a href="{% url 'store'product.id %}" class="btn btn-info">view more</a>
+                        </div>
+                      </div>
+                </a>
+           </div> 
+          {% endfor %}
+        {% else %}
+          <p class="lead bg-danger">no  in the data base yet</p>
+        {% endif %}
+        
+      </div>
+      <!-- <div class="row my-5">
+        <div class="col-md-5 mx-auto py-4">
+          <ul class="pagination"> -->
+            <!-- previous page paginator -->
+            <!-- {% if paginator.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{paginator.previous_page_number}}">Previous</a></li>
+            {% else %}
+            <li class="page-item disabled "><a class="page-link">Previous</a></li>
+            {% endif %} -->
+
+            <!-- current page paginator -->
+            <!-- {% for i in paginator.paginator.page_range %}
+              {% if i== paginator.number %}
+                <li class="page-item"><a class="page-link">{{i}}</a></li>
+              {% else %}
+                 <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+              {% endif %}
+              
+            {% endfor %} -->
+
+            <!-- next page paginator -->
+            <!-- {% if paginator.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{paginator.next_page_number}}">Next</a></li>
+            {% else %}
+            <li class="page-item disabled "><a class="page-link">Next</a></li>
+            {% endif %} -->
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

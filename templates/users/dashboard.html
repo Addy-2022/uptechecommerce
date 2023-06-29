@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}user dashboard{% endblock title %}
+
+{% block content %}
+<section id="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card rounded-circle mx-auto w-35 my-3 overflow-hidden p-4 border">
+                    {% if users %}
+                        <img src="{{user.profile_pix.url}}" alt="" class="card-img ">
+                    {% else %}
+                        <p>no image available yet</p>
+                    {% endif %}  
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-items">Fullname: <strong>{{users.fullname}}</strong></li>
+                        <li class="list-group-items">username: <strong>{{users.username}}</strong></li>
+                        <li class="list-group-items">address: <strong>{{users.address}}</strong></li>
+                        <li class="list-group-items">phone no: <strong>{{users.phone}}</strong></li>
+                        <li class="list-group-items bg-dark"><a href="{% url 'update' %}" class="tect-decoration-none text-white"><strong>Update profile</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+{% endblock content %}

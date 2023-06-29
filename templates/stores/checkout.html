@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+<!-- title -->
+{% block title %}
+  category page
+{% endblock title %}
+
+<!-- body -->
+{% block content %}
+  <!-- category -->
+  <section id="category my-3 py-3">
+    <div class="intro text-center">
+      <h6 class="display-6">our categories</h6>
+      <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+    </div>
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card">
+                <table class="table table-responsive">
+                    {% if cart %}
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>image</th>
+                                <th>product</th>
+                                <th>price</th>
+                                <th>qty</th>
+                                <th>subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart.cartproduct_set.all %}
+                            <td>{{forloop.counter}}</td>
+                            <td><img src="{{item.product.image.url}}" width="100" alt="{{item.product.title}}" class="img-thumbnail img-fluid"></td>
+                            <td>{{item.product.title}}</td>
+                            <td> &#8358; {{item.product.price |intcomma}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td><h4>&#8358; {{item.subtotal |intcomma}} </h4></td>
+                            {% endfor %}
+
+                            <tr>
+                                <td><h3>Total:</h3></td>
+                                <td colspan="5" class="text-end"><h3>= &#8358; {{cart.total |intcomma}} </h3></td>
+                            </tr>
+                            <tr>
+                                <td><a href="{% url 'stores' %}" class="btn btn-success">continue shopping</a></td>
+                            </tr>
+                        </tbody>
+
+                    {% else %}
+                      
+                    {% endif %}
+                    
+                </table>
+            </div>
+        </div>  
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Order Form</div>
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid">
+          <button type="submit">place order</button>  
+        </div>   
+      </div>
+    </div>
+  </section>
+{% endblock content %}

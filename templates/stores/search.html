@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+<!-- title -->
+{% block title %}
+  store page
+{% endblock title %}
+
+<!-- body -->
+{% block content %}
+  <!-- products -->
+  <section id="products my-3 py-3">
+    <div class="intro text-center">
+      <h6 class="display-6">our product {{product.title|title}}</h6>
+      <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+    </div>
+    <div class="container">
+      <div class="row g-3">
+            {% if product %}
+            {% for product in products %}
+              <!-- products -->
+  <section id="products my-3 py-3">
+    <div class="intro text-center">
+      <h6 class="display-6">our products</h6>
+      <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+    </div>
+    <div class="container">
+      <div class="row g-3">
+        {% if products %}
+          {% for product in products %}
+           <div class="col-md-3">
+            <div class="card">
+                <h3>{{product.title}}</h3>
+              <img src="{{product.image.url}}" alt="" style="height:25vh;" class="img-fluid">
+              <div class="card-body">
+               <span class="badge bg-primary"><strong>In stock: {{product.stock}}</strong></span>
+               <h3> &#8358; {{product.price}} </h3>
+               <p class="lead">{{product.description |truncatewords:8}}</p>
+              </div>
+              <div class="card-footer">
+                <a href="{% url 'addtocart' product.id %}" class="btn btn-success">add to cart</a>
+                <a href="{% url 'store'product.id %}" class="btn btn-info">view more</a>
+              </div>
+            </div>
+           </div> 
+          {% endfor %}
+        {% else %}
+          <p class="lead bg-danger">no products in the data base yet</p>
+        {% endif %}
+        
+            {% endfor %}
+            
+            {% endif %}
+        </div>
+    </div>
+  </section>
+{% endblock content %}

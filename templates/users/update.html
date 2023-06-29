@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+  update title
+{% endblock title %}
+
+{% block content %}
+<section id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-dark text-white display-5 text-center">register here</div>
+                    <div class="card-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            {{forms.error}}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark">register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock content %}

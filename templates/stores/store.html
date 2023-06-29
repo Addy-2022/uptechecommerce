@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+<!-- title -->
+{% block title %}
+  store page
+{% endblock title %}
+
+<!-- body -->
+{% block content %}
+  <!-- products -->
+  <section id="products my-3 py-3">
+    <div class="intro text-center">
+      <h6 class="display-6">our product {{product.title|title}}</h6>
+      <p-lead>Lorem ipsum dolor sit amet consectetur.</p-lead>
+    </div>
+    <div class="container">
+      <div class="row g-3">
+            {% if product %}
+            <div class="col-md-4">
+                <div class="card p-2">
+                    <img src="{{product.image.url}}" alt="" height="200" class="img-fluid">
+                </div>   
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{product.title}}</div>
+                    <div class="card-body">
+                        <span class="badge bg-primary"><strong>In stock: {{product.stock}}</strong></span>
+                        <h3 class="display-6"> &#8358; {{product.price}} </h3>
+                        <p class="lead">{{product.description}}</p>
+                    </div>
+                    <div class="d-grid">
+                        <a href="{% url 'addtocart' product.id %}" class="btn btn-success">add to cart</a>
+                    </div>
+                </div>
+            </div> 
+            {% else %}
+            <p class="lead bg-danger">no products in the data base yet</p>
+            {% endif %}
+        </div>
+    </div>
+  </section>
+{% endblock content %}

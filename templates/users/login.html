@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <section id="login">
+        <div class="container my-4">
+            <div class="row">
+                <div class="col-md-5 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white display-5 text-center">Login</div>
+                        <div class="card-body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group my-3">
+                                    <label for=""><i class="bi bi-person"></i></label>
+                                    <input type="text" class="form-control" name="uname" placeholder="your username">
+                                </div>
+                                <div class="form-group d-flex my-3">
+                                    <label for="" class="d-grid"><i class="bi bi-lock"></i></label>
+                                    <input type="input-group-text" class="form-control" id="pwd" name="pwd" placeholder="password">
+                                    <span class="input-group-text" id="showpwd"><i class="bi bi-eye"></i></span>
+                                </div>
+                                <div class="d-grid my-3">
+                                    <button type="submit" class="btn btn-dark">login</button>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span><a href="{% url 'reset_password' %}" class=" text-danger text-decoration-none">Forget Password?</a></span>
+                                    <span><a href="{% url 'register' %}" class="text-dark text-decoration-none">Click to Signup</a></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </section>
+{% endblock content %}

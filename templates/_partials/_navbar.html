@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">Uptech</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mx-auto ">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'index' %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'stores' %}" aria-current="page">stores</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">categories</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        {% if categorys %}
+                          {% for cat in categorys %}
+                          <a class="dropdown-item" href="{% url 'category' cat.id %}">{{cat.title}}</a>
+                          {% endfor %}
+                        {% else %}
+                          <p class="lead bg-dark">no category in the database</p>
+                        {% endif %}
+                        
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        {% if request.user.is_authenticated %}
+                            <a class="dropdown-item" href="#">Dashboard</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                       
+                        {% else %}
+                            <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                            <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                        {% endif %}
+                        
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'myCart' %}"><i class="bi bi-cart3"><span class="badge bg-danger">{{items}}</span></i></a>
+                </li>
+            </ul>
+            <form class="d-flex my-2 my-lg-0" action="{% url 'search' %}"  method="GET">
+                <input class="form-control me-sm-2" name="kword" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+  </div>
+</nav>
