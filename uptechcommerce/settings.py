@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,3 +149,13 @@ EMAIL_USE_SSL = True
 # paystack keys
 PAYSTACK_SECRETE_KEY = str(os.getenv('PAYSTACK_SECRETE_KEY'))
 PAYSTACK_PUBLIC_KEY = str(os.getenv('PAYSTACK_PUBLIC_KEY'))
+
+# jazzmin settings
+JAZZMIN_SETTINGS = {
+    "site_title": "UpTech Ecommerce Admin",
+    "site_header": "uptech",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "darkly",
+}
